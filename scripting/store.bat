@@ -1,0 +1,2 @@
+spcomp store.sp
+pause
