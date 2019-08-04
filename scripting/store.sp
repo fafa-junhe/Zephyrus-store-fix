@@ -477,13 +477,13 @@ public AdminMenu_ResetPlayer(Handle:topmenu, TopMenuAction:action, TopMenuObject
 {
 	if (action == TopMenuAction_DisplayOption)
 	{
-		Format(buffer, maxlength, "Reset player");
+		Format(buffer, maxlength, "重置玩家");
 	}
 	else if (action == TopMenuAction_SelectOption)
 	{
 		g_iMenuNum[client] = 4;
 		new Handle:m_hMenu = CreateMenu(MenuHandler_ResetPlayer);
-		SetMenuTitle(m_hMenu, "Choose a player to reset");
+		SetMenuTitle(m_hMenu, "选择一个想要重置的玩家");
 		SetMenuExitBackButton(m_hMenu, true);
 		LoopAuthorizedPlayers(i)
 		{
@@ -512,7 +512,7 @@ public MenuHandler_ResetPlayer(Handle:menu, MenuAction:action, client, param2)
 			GetMenuItem(menu, param2, g_szClientData[client], sizeof(g_szClientData[]), style, STRING(m_szName));
 
 			decl String:m_szTitle[256];
-			Format(STRING(m_szTitle), "Do you want to reset %s?", m_szName);
+			Format(STRING(m_szTitle), "你想要重置 %s?", m_szName);
 			Store_DisplayConfirmMenu(client, m_szTitle, MenuHandler_ResetPlayer, 0);
 		}
 	}
@@ -565,7 +565,7 @@ public MenuHandler_GiveCredits(Handle:menu, MenuAction:action, client, param2)
 			return;
 		}
 
-		SetMenuTitle(m_hMenu, "Choose the amount of credits\n%N - %d credits", target, g_eClients[target][iCredits]);
+		SetMenuTitle(m_hMenu, "选择点券的数目\n%N - %d 数目", target, g_eClients[target][iCredits]);
 		SetMenuExitBackButton(m_hMenu, true);
 		AddMenuItem(m_hMenu, "-1000", "-1000");
 		AddMenuItem(m_hMenu, "-100", "-100");
@@ -602,7 +602,7 @@ public AdminMenu_ViewInventory(Handle:topmenu, TopMenuAction:action, TopMenuObje
 {
 	if (action == TopMenuAction_DisplayOption)
 	{
-		Format(buffer, maxlength, "View inventory");
+		Format(buffer, maxlength, "查看物品栏");
 	}
 	else if (action == TopMenuAction_SelectOption)
 	{
@@ -811,7 +811,7 @@ public Native_SetClientCredits(Handle:plugin, numParams)
 {
 	new client = GetNativeCell(1);
 	new m_iCredits = GetNativeCell(2);
-	Store_LogMessage(client, m_iCredits-g_eClients[client][iCredits], "Set by external plugin");
+	Store_LogMessage(client, m_iCredits-g_eClients[client][iCredits], "被外部插件设置");
 	g_eClients[client][iCredits] = m_iCredits;
 	return 1;
 }
